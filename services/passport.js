@@ -9,6 +9,12 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
+passport.deserializeUser((userId, done) => {
+  User.findById(userId, (err, foundUser) => {
+    done(null, foundUser);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
