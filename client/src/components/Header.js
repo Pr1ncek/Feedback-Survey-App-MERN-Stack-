@@ -14,7 +14,9 @@ class Header extends Component {
         );
       default:
         return (
-          <span className="navbar-text">Logged in</span>
+          <a className="nav-item nav-link" href="/api/logout">
+            Log out
+          </a>
         );
     }
   }
