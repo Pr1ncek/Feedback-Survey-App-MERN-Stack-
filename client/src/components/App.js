@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 import Header from './Header';
 
 const Landing = () => {
@@ -8,12 +10,9 @@ const Landing = () => {
 };
 
 class App extends Component {
-
-  componentDidMount(){
-    
+  componentDidMount() {
+    this.props.fetchUserAction();
   }
-
-
 
   render() {
     return (
@@ -31,8 +30,7 @@ class App extends Component {
   }
 }
 
-function mapDispatchToProps(){
-
-}
-
-export default App;
+export default connect(
+  null,
+  actions
+)(App);
