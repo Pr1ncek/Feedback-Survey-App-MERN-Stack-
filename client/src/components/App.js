@@ -4,10 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header';
-
-const Landing = () => {
-  return <h2>Landing</h2>;
-};
+import Landing from './Landing';
 
 class App extends Component {
   componentDidMount() {

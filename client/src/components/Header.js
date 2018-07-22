@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   renderContent() {
@@ -24,10 +25,10 @@ class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-dark bg-dark">
-        <a className="navbar-brand" href="/">
+        <Link to={this.props.auth ? '/surveys' : '/'} className="navbar-brand">
           Emaily
-        </a>
-          <div className="navbar-nav">{this.renderContent()}</div>
+        </Link>
+        <div className="navbar-nav">{this.renderContent()}</div>
       </nav>
     );
   }
