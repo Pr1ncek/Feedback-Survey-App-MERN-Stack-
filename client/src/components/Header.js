@@ -19,6 +19,7 @@ class Header extends Component {
         return (
           <div className="mr-2">
             <Payment />
+
             <button className="ml-4 btn-danger btn">
               <a href="/api/logout">Log out</a>
             </button>
