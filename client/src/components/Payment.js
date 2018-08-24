@@ -5,6 +5,8 @@ class Payment extends Component {
   render() {
     return (
       <StripeCheckout
+        name="Add Survey Credits"
+        description="$5 for five credits"
         amount={500} // cents
         currency="USD"
         token={token => {

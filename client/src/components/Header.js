@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payment from './Payment';
+import './header.css';
 
 class Header extends Component {
   renderContent() {
@@ -9,14 +10,18 @@ class Header extends Component {
       case null:
         return;
       case false:
-        return <a href="/auth/google">Login with Google</a>;
+        return (
+          <button className="ml-4 btn-primary btn">
+            <a href="/auth/google">Login with Google</a>
+          </button>
+        );
       default:
         return (
           <div className="mr-2">
             <Payment />
-            <a href="/api/logout" className="ml-4">
-              Log out
-            </a>
+            <button className="ml-4 btn-danger btn">
+              <a href="/api/logout">Log out</a>
+            </button>
           </div>
         );
     }
