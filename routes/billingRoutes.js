@@ -9,7 +9,10 @@ module.exports = app => {
       description: '$5 for five survey credits',
       source: req.body.id
     });
-    console.log(response);
-    res.json(response);
+
+    req.user.credits += 5;
+
+    const updatedUser = await req.user.save();
+    res.json(updatedUser);
   });
 };
