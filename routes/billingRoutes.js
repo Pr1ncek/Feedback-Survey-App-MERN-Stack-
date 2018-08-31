@@ -1,8 +1,11 @@
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.stripeSecretKey);
 
+// Auth middleware
+const verifyAuth = require('../middleware/verifyAuth');
+
 module.exports = app => {
-  app.post('/api/stripe', async (req, res) => {
+  app.post('/api/stripe', verifyAuth, async (req, res) => {
     const response = await stripe.charges.create({
       amount: 500,
       currency: 'usd',

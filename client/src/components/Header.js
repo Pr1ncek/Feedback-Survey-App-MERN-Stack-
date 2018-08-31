@@ -17,12 +17,18 @@ class Header extends Component {
         );
       default:
         return (
-          <div className="mr-2">
-            <Payment />
-
-            <button className="ml-4 btn-danger btn">
-              <a href="/api/logout">Log out</a>
-            </button>
+          <div>
+            <li className="nav-item mr-4 align-middle text-uppercase font-weight-bold text-monospace">
+              Credits: {this.props.auth.credits}
+            </li>
+            <li className="nav-item">
+              <Payment />
+            </li>
+            <li className="nav-item">
+              <button className="ml-2 btn-danger btn">
+                <a href="/api/logout">Log out</a>
+              </button>
+            </li>
           </div>
         );
     }
@@ -34,7 +40,7 @@ class Header extends Component {
         <Link to={this.props.auth ? '/surveys' : '/'} className="navbar-brand">
           Emaily
         </Link>
-        <div className="navbar-nav">{this.renderContent()}</div>
+        <ul className="navbar-nav">{this.renderContent()}</ul>
       </nav>
     );
   }

@@ -3,15 +3,20 @@ a:hover {
   color: #fff;
 }
 
-.btn {
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn-primary {
   background-color: #3089e8;
 }
 
-.btn:hover {
+.btn-primary:hover {
   background-color: #3089e8;
 }
 
-.btn:active {
+.btn-primary:active {
   background-color: #3089e8;
 }
 .btn-danger {
