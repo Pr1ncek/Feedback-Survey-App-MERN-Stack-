@@ -11,4 +11,4 @@ const recipientSchema = new mongoose.Schema({
   }
 });
 
-export default recipientSchema;
+module.exports = recipientSchema;

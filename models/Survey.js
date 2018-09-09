@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const recipientSchema = require('./Recipient');
 
 const surveySchema = new mongoose.Schema({
+  _user: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'User'
+  },
   title: {
     type: String,
     required: true
@@ -20,7 +24,9 @@ const surveySchema = new mongoose.Schema({
     required: true
   },
   yes: { type: Number, default: 0 },
-  no: { type: Number, default: 0 }
+  no: { type: Number, default: 0 },
+  dateSent: Date,
+  lastResponded: Date
 });
 
-export default mongoose.model('Survey', surveySchema);
+module.exports = mongoose.model('Survey', surveySchema);
