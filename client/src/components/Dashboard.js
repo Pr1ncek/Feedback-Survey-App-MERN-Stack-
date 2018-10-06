@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
     <div>
-      <h2 className="ml-auto mr-auto">Dashboard</h2>
-      <div className="fixed-action-btn">
-        <a className="btn-floating btn-large red">
+      <h2 className="d-flex justify-content-center">Dashboard</h2>
+      <div className="floating-action-btn d-flex justify-content-end">
+        <Link to="/surveys/new" className="btn-floating btn-large red">
           <i className="material-icons">add</i>
-        </a>
+        </Link>
       </div>
     </div>
   );
