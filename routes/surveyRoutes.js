@@ -7,6 +7,10 @@ const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 module.exports = app => {
+  app.get('/api/surveys/redirect', (req, res) => {
+    res.send('Thank you. Your response has been saved.');
+  });
+
   app.post('/api/surveys', verifyAuth, verifyCredits, async (req, res) => {
     const { recipients } = req.body;
 
