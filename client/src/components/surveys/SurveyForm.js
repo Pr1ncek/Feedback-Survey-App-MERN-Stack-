@@ -42,10 +42,11 @@ class SurveyForm extends Component {
   render() {
     return (
       <div className="mt-5">
+        <h3 className="text-center mb-2 display-5">Create a New Survey</h3>
         <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
           {this.renderFields()}
-          <div className="mt-3">
-            <button className="btn teal right" type="button">
+          <div className="mt-4">
+            <button className="btn teal right" type="submit">
               Next
               <i className="material-icons right">arrow_forward</i>
             </button>
@@ -62,18 +63,9 @@ class SurveyForm extends Component {
 const validate = values => {
   const errors = {};
 
-  if (!values.title) {
-    errors.title = 'You must provide a title!';
-  }
-  if (!values.subject) {
-    errors.subject = 'You must provide a subject line!';
-  }
-  if (!values.body) {
-    errors.body = 'You must provide an email body!';
-  }
-  if (!values.recipients) {
-    errors.recipients = 'You must provide a list of recipients!';
-  }
+  FIELDS.forEach(({ name }) => {
+    if (!values[name]) errors[name] = `You must provide ${name}!`;
+  });
 
   return errors;
 };

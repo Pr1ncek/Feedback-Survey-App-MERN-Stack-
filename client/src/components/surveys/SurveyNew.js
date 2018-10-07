@@ -5,7 +5,7 @@ import SurveyForm from './SurveyForm';
 class SurveyNew extends Component {
   render() {
     return (
-      <div>
+      <div className="w-75 ml-auto mr-auto">
         <SurveyForm />
       </div>
     );
