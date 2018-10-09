@@ -1,14 +1,29 @@
 // SurveyNew shows SurveryForm and SurveyFormReview components
 import React, { Component } from 'react';
 import SurveyForm from './SurveyForm';
+import SurveyFormReview from './SurveyFormReview';
 
 class SurveyNew extends Component {
-  render() {
+  state = {
+    showFormReview: false
+  };
+
+  renderContent() {
+    if (this.state.showFormReview)
+      return (
+        <SurveyFormReview
+          onCancel={() => this.setState({ showFormReview: false })}
+        />
+      );
     return (
-      <div className="w-75 ml-auto mr-auto">
-        <SurveyForm />
-      </div>
+      <SurveyForm
+        onSurveySubmit={() => this.setState({ showFormReview: true })}
+      />
     );
+  }
+
+  render() {
+    return <div className="w-75 ml-auto mr-auto">{this.renderContent()}</div>;
   }
 }
 

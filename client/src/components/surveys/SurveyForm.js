@@ -44,7 +44,7 @@ class SurveyForm extends Component {
     return (
       <div className="mt-5">
         <h3 className="text-center mb-2 display-5">Create a New Survey</h3>
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+        <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
           {this.renderFields()}
           <div className="mt-4">
             <button className="btn teal right" type="submit">
@@ -75,5 +75,6 @@ const validate = values => {
 
 export default reduxForm({
   validate,
-  form: 'surveyForm'
+  form: 'surveyForm',
+  destroyOnUnmount: false
 })(SurveyForm);
