@@ -4,25 +4,7 @@ import SurveyField from './SurveyField';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import validateEmails from '../../utils/validateEmails';
-
-const FIELDS = [
-  {
-    name: 'title',
-    label: 'Survey Title',
-    placeholder: 'Title for your survey. Only visible to you.'
-  },
-  {
-    name: 'subject',
-    label: 'Subject Line',
-    placeholder: 'Subject line for the email'
-  },
-  { name: 'body', label: 'Email Body', placeholder: 'Body of the email' },
-  {
-    name: 'recipients',
-    label: 'Recipients List',
-    placeholder: 'A comma separated list of emails'
-  }
-];
+import FIELDS from './formFields';
 
 class SurveyForm extends Component {
   renderFields() {
@@ -43,7 +25,7 @@ class SurveyForm extends Component {
   render() {
     return (
       <div className="mt-5">
-        <h3 className="text-center mb-2 display-5">Create a New Survey</h3>
+        <h3 className="text-center mb-4 display-5">Create a New Survey</h3>
         <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
           {this.renderFields()}
           <div className="mt-4">
