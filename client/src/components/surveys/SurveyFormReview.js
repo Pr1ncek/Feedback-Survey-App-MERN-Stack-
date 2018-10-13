@@ -26,7 +26,11 @@ const SurveyFormReview = ({ onCancel, formValues, sendSurvey, history }) => {
       </button>
       <button
         className="teal btn-flat right white-text"
-        onClick={() => sendSurvey(formValues, history)}
+        onClick={e => {
+          e.target.disabled = 'true';
+          e.target.style.visibility = 'hidden';
+          sendSurvey(formValues, history);
+        }}
       >
         Send Survey
         <i className="material-icons right">email</i>
