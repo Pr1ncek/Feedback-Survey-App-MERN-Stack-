@@ -11,6 +11,11 @@ module.exports = app => {
     res.send('Thank you. Your response has been saved.');
   });
 
+  app.post('/api/surveys/webhooks', (req, res) => {
+    console.log(req.body);
+    res.send({});
+  });
+
   app.post('/api/surveys', verifyAuth, verifyCredits, async (req, res) => {
     const { recipients } = req.body;
 
