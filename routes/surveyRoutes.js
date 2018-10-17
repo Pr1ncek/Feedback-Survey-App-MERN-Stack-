@@ -9,24 +9,34 @@ const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 module.exports = app => {
-  app.get('/api/surveys/redirect', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thank you. Your response has been saved.');
   });
 
   app.post('/api/surveys/webhooks', (req, res) => {
-    const events = _.map(req.body, ({ email, url }) => {
-      const { pathname } = new URL(url);
-      const parser = new Path('/api/surveys/:surveyId/:choice');
-      const matched = parser.test(pathname);
-      if (matched) {
-        return { ...matched, email };
-      }
-    });
+    const parser = new Path('/api/surveys/:surveyId/:choice');
 
-    const compactEvents = _.compact(events);
-    const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
-
-    console.log(uniqueEvents);
+    _.chain(req.body)
+      .map(({ email, url }) => {
+        const matched = parser.test(new URL(url).pathname);
+        if (matched) return { ...matched, email };
+      })
+      .compact()
+      .uniqBy('email', 'surveyId')
+      .each(({ surveyId, email, choice }) => {
+        Survey.updateOne(
+          {
+            _id: surveyId,
+            recipients: { $elemMatch: { email, responded: false } }
+          },
+          {
+            $inc: { [choice]: 1 },
+            $set: { 'recipients.$.responded': true },
+            $set: { lastResponded: new Date() }
+          }
+        ).exec();
+      })
+      .value();
 
     res.send({});
   });
@@ -36,7 +46,9 @@ module.exports = app => {
 
     const newSurvey = new Survey({
       ...req.body,
-      recipients: recipients.split(',').map(email => ({ email: email.trim() })),
+      recipients: recipients
+        .split(',')
+        .map(email => ({ email: email.trim().toLowerCase() })),
       _user: req.user.id
     });
 
