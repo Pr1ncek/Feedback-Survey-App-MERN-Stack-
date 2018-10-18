@@ -64,4 +64,6 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
+
+  app.get('/api/surveys', verifyAuth, (req, res) => {});
 };
