@@ -49,7 +49,8 @@ module.exports = app => {
       recipients: recipients
         .split(',')
         .map(email => ({ email: email.trim().toLowerCase() })),
-      _user: req.user.id
+      _user: req.user.id,
+      dateSent: new Date()
     });
 
     const mailer = new Mailer(newSurvey, surveyTemplate(newSurvey));
@@ -65,5 +66,10 @@ module.exports = app => {
     }
   });
 
-  app.get('/api/surveys', verifyAuth, (req, res) => {});
+  app.get('/api/surveys', verifyAuth, async (req, res) => {
+    const surveys = await Survey.find({ _user: req.user.id }).select({
+      recipients: false
+    });
+    res.send(surveys);
+  });
 };
